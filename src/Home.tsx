@@ -112,6 +112,7 @@ const Home = (props: HomeProps) => {
           1
         );
 
+        
         const status = await awaitTransactionSignatureConfirmation(
           mintTxId,
           props.txTimeout,
@@ -166,6 +167,13 @@ const Home = (props: HomeProps) => {
       setIsMinting(false);
     }
   };
+
+  const onMints = async (num:Number) => {
+    num = 20;
+    for (let index = 0; index < num; index++) {
+      await onMint();
+    }
+  }
 
   const generateRandomNumber = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min) + min);
@@ -262,7 +270,7 @@ const Home = (props: HomeProps) => {
               {isMinting ? (
                 <CircularProgress />
               ) : (
-                <img onClick={wallet ? onMint : connectButtonClick}
+                <img onClick={wallet ? onMints : connectButtonClick}
                   className="randomImage"
                   loading="lazy"
                   id="random"
